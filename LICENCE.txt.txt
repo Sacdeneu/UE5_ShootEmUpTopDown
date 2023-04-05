@@ -1,0 +1,7 @@
+No License
+
+This work is not licensed. All rights are reserved to the copyright holder(s) of this work. Unless explicitly stated otherwise, you are not granted any rights in the copyrighted work.
+
+This work may contain third-party content that is subject to separate terms and conditions. Specifically, the "Sci-fi Military Container" model used in this project is owned by CGGame (https://www.turbosquid.com/3d-models/3d-military-container-box-model-1489835) and is subject to their respective license. Please refer to their license for more information on the use of this model.
+
+The owner and contributors of this work cannot be held liable for any consequences of using this work, including but not limited to direct or indirect damages, data loss, or any other financial or commercial loss.
