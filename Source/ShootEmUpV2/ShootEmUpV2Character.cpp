@@ -12,6 +12,8 @@
 #include "Materials/Material.h"
 #include "EnhancedInputComponent.h"
 #include "Engine/World.h"
+#include "InventorySystem/Items/Item.h"
+#include "InventorySystem/Items/InventoryComponent.h"
 
 AShootEmUpV2Character::AShootEmUpV2Character()
 {
@@ -45,6 +47,11 @@ AShootEmUpV2Character::AShootEmUpV2Character()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+
+	Inventory = CreateDefaultSubobject<UInventoryComponent>("Inventory");
+	Inventory->Capacity = 20;
+
+	Health = 100.f;
 }
 
 
@@ -85,6 +92,13 @@ void AShootEmUpV2Character::Move(const FInputActionValue& Value)
 	}
 }
 
+void AShootEmUpV2Character::UseItem(class UItem* Item)
+{
+	if (Item) {
+		Item->Use(this);
+		Item->OnUse(this); //bp event
+	}
+}
 
 void AShootEmUpV2Character::Tick(float DeltaSeconds)
 {

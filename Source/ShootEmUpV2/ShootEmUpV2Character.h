@@ -16,9 +16,18 @@ class AShootEmUpV2Character : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* MoveAction;
 
+	/** Inventory */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class UInventoryComponent* Inventory;
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Health")
+		float Health;
+	UFUNCTION(BlueprintCallable, Category = "Items")
+		void UseItem(class UItem* Item);
+
 public:
 	AShootEmUpV2Character();
-
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
 

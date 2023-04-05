@@ -15,38 +15,43 @@ class SHOOTEMUPV2_API UItem : public UObject
 	GENERATED_BODY()
 
 public:
-	//UItem();
+	UItem();
 
-	///**The text for using the item. (Equip, Eat, etc)*/
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
-	//	FText UseActionText;
+	virtual class UWorld* GetWorld() const { return World; }
 
-	///**The mesh to display for this item pickup*/
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
-	//	class UStaticMesh* PickupMesh;
+	UPROPERTY(Transient)
+	class UWorld* World;
 
-	///**The thumbnail for this item*/
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
-	//	class UTexture2D* Thumbnail;
+	/**The text for using the item. (Equip, Eat, etc)*/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+		FText UseActionText;
 
-	///**The display name for this item in the inventory*/
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
-	//	FText ItemDisplayName;
+	/**The mesh to display for this item pickup*/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+		class UStaticMesh* PickupMesh;
 
-	///**An optional description for the item*/
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (MultiLine = true))
-	//	FText ItemDescription;
+	/**The thumbnail for this item*/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
+		class UTexture2D* Thumbnail;
 
-	///**The wieght of the item*/
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0.0))
-	//	float Weight;
+	/**The display name for this item in the inventory*/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+		FText ItemDisplayName;
 
-	///**The inventory that own this item*/
-	//UPROPERTY()
-	//	class UInventoryComponent* OwningInventory;
+	/**An optional description for the item*/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (MultiLine = true))
+		FText ItemDescription;
 
-	//virtual void Use(class AInventorySystemCharacter* Character) PURE_VIRTUAL(UItem, );
+	/**The weight of the item*/
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0.0))
+		float Weight;
 
-	//UFUNCTION(BlueprintImplementableEvent)
-		//void OnUse(class AInventorySystemCharacter* Character);
+	/**The inventory that own this item*/
+	UPROPERTY()
+		class UInventoryComponent* OwningInventory;
+
+	virtual void Use(class AShootEmUpV2Character* Character);
+
+	UFUNCTION(BlueprintImplementableEvent)
+		void OnUse(class AShootEmUpV2Character* Character);
 };
