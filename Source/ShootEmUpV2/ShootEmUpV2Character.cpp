@@ -14,6 +14,8 @@
 #include "Engine/World.h"
 #include "InventorySystem/Items/Item.h"
 #include "InventorySystem/Items/InventoryComponent.h"
+#include <Actions/PawnAction.h>
+#include "ShootEmUpV2PlayerController.h"
 
 AShootEmUpV2Character::AShootEmUpV2Character()
 {
@@ -52,8 +54,35 @@ AShootEmUpV2Character::AShootEmUpV2Character()
 	Inventory->Capacity = 20;
 
 	Health = 100.f;
+	// Set up initial variables
+	bIsWeaponEquipped = false;
+	EquippedWeapon = nullptr;
 }
 
+//void AShootEmUpV2Character::EquipWeapon(UWeaponItem* NewWeapon)
+//{
+//	if (NewWeapon != nullptr)
+//	{
+//		if (EquippedWeapon != nullptr)
+//		{
+//			EquippedWeapon->DetachFromActor(FDetachmentTransformRules::KeepRelativeTransform);
+//			EquippedWeapon->Destroy();
+//		}
+//
+//		EquippedWeapon = NewWeapon;
+//		EquippedWeapon->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, WeaponAttachPointName);
+//		EquippedWeapon->SetOwner(this);
+//		bIsWeaponEquipped = true;
+//	}
+//}
+//
+//void AShootEmUpV2Character::OnFire()
+//{
+//	if (bIsWeaponEquipped && EquippedWeapon != nullptr)
+//	{
+//		EquippedWeapon->Fire();
+//	}
+//}
 
 //////////////////////////////////////////////////////////////////////////
 // Input

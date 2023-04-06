@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "InputActionValue.h"
+#include "InventorySystem/Items/WeaponItem.h"
 #include "ShootEmUpV2Character.generated.h"
 
 UCLASS(config=Game)
@@ -18,13 +19,24 @@ class AShootEmUpV2Character : public ACharacter
 
 	/** Inventory */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UInventoryComponent* Inventory;
+		class UInventoryComponent* Inventory;
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Health")
 		float Health;
+	/* Weapon Equipped */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
+		bool bIsWeaponEquipped;
+
+	/* Weapon Item */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
+		UWeaponItem* EquippedWeapon;
+public:
 	UFUNCTION(BlueprintCallable, Category = "Items")
 		void UseItem(class UItem* Item);
+	/* Use Weapon */
+	//UFUNCTION(BlueprintCallable, Category = "Inventory")
+		//void UseWeapon(UWeaponItem* Weapon);
 
 public:
 	AShootEmUpV2Character();
