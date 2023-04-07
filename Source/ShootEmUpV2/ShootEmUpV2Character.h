@@ -22,8 +22,10 @@ class AShootEmUpV2Character : public ACharacter
 		class UInventoryComponent* Inventory;
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Health")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health")
 		float Health;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Score")
+		float Score;
 	/* Weapon Equipped */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
 		bool bIsWeaponEquipped;

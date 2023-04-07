@@ -54,6 +54,7 @@ AShootEmUpV2Character::AShootEmUpV2Character()
 	Inventory->Capacity = 20;
 
 	Health = 100.f;
+	Score = 0.f;
 	// Set up initial variables
 	bIsWeaponEquipped = false;
 	EquippedWeapon = nullptr;
