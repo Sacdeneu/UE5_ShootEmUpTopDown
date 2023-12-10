@@ -16,6 +16,7 @@
 #include "InventorySystem/Items/InventoryComponent.h"
 #include <Actions/PawnAction.h>
 #include "ShootEmUpV2PlayerController.h"
+#include "InventorySystem/Items/Crate.h"
 
 AShootEmUpV2Character::AShootEmUpV2Character()
 {
@@ -52,7 +53,7 @@ AShootEmUpV2Character::AShootEmUpV2Character()
 
 	Inventory = CreateDefaultSubobject<UInventoryComponent>("Inventory");
 	Inventory->Capacity = 20;
-
+	InteractionRange = 200.f;
 	Health = 100.f;
 	Score = 0.f;
 	// Set up initial variables
@@ -120,6 +121,32 @@ void AShootEmUpV2Character::Move(const FInputActionValue& Value)
 		AddMovementInput(ForwardDirection, MovementVector.Y);
 		AddMovementInput(RightDirection, MovementVector.X);
 	}
+
+		FVector Start = GetActorLocation();
+		Start.Z -= 100.0f;
+		FVector ForwardVector = GetActorForwardVector();
+		FVector End = Start + ForwardVector * InteractionRange;
+
+		FHitResult HitResult;
+		FCollisionQueryParams CollisionParams;
+		CollisionParams.AddIgnoredActor(this);
+
+		// Perform a trace to check for a crate
+		if (GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECC_Visibility, CollisionParams))
+		{
+			if (IInteractableInterface* Interactable = Cast<IInteractableInterface>(HitResult.GetActor()))
+			{
+
+				// Interact with the crate
+				IInteractableInterface::Execute_Interact(HitResult.GetActor());
+			}
+		}
+		DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 3.0f, 0, 2.0f);
+}
+
+UInventoryComponent* AShootEmUpV2Character::GetInventory() const
+{
+	return Inventory;
 }
 
 void AShootEmUpV2Character::UseItem(class UItem* Item)

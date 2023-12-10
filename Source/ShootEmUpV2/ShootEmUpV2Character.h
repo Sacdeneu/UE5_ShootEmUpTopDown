@@ -33,12 +33,17 @@ public:
 	/* Weapon Item */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
 		UWeaponItem* EquippedWeapon;
+protected:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Interaction")
+	float InteractionRange;
 public:
 	UFUNCTION(BlueprintCallable, Category = "Items")
 		void UseItem(class UItem* Item);
 	/* Use Weapon */
 	//UFUNCTION(BlueprintCallable, Category = "Inventory")
 		//void UseWeapon(UWeaponItem* Weapon);
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+		class UInventoryComponent* GetInventory() const;
 
 public:
 	AShootEmUpV2Character();
