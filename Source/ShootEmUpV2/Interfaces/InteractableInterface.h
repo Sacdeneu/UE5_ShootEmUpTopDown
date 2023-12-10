@@ -15,5 +15,7 @@ class SHOOTEMUPV2_API IInteractableInterface
 
 public:
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
+	void CanInteract();
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Interaction")
 	void Interact();
 };

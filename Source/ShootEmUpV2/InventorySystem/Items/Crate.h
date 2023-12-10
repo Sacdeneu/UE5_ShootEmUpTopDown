@@ -33,7 +33,10 @@ protected:
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Interaction")
+	void OnCanInteract(class AShootEmUpV2Character* PlayerCharacter);
+	UFUNCTION(BlueprintCallable, Category = "Interaction")
 	void OnInteract(class AShootEmUpV2Character* PlayerCharacter);
 
 	virtual void Interact_Implementation() override;
+	virtual void CanInteract_Implementation() override;
 };

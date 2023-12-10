@@ -20,6 +20,8 @@
 
 AShootEmUpV2Character::AShootEmUpV2Character()
 {
+	Health = 100.f;
+	Score = 0.f;
 	// Set size for player capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -54,8 +56,6 @@ AShootEmUpV2Character::AShootEmUpV2Character()
 	Inventory = CreateDefaultSubobject<UInventoryComponent>("Inventory");
 	Inventory->Capacity = 20;
 	InteractionRange = 200.f;
-	Health = 100.f;
-	Score = 0.f;
 	// Set up initial variables
 	bIsWeaponEquipped = false;
 	EquippedWeapon = nullptr;
@@ -95,10 +95,35 @@ void AShootEmUpV2Character::SetupPlayerInputComponent(class UInputComponent* Pla
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent)) {
 		//Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AShootEmUpV2Character::Move);
+		EnhancedInputComponent->BindAction(InteractAction, ETriggerEvent::Triggered, this, &AShootEmUpV2Character::Interact);
 
 	}
 
 }
+
+void AShootEmUpV2Character::Interact()
+{
+	FVector Start = GetActorLocation();
+	Start.Z -= 100.0f;
+	FVector ForwardVector = GetActorForwardVector();
+	FVector End = Start + ForwardVector * InteractionRange;
+
+	FHitResult HitResult;
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(this);
+
+	// Perform a trace to check for a crate
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, Start, End, ECC_Visibility, CollisionParams))
+	{
+		if (IInteractableInterface* Interactable = Cast<IInteractableInterface>(HitResult.GetActor()))
+		{
+
+			// Interact with the crate
+			IInteractableInterface::Execute_Interact(HitResult.GetActor());
+		}
+	}
+}
+
 
 void AShootEmUpV2Character::Move(const FInputActionValue& Value)
 {
@@ -138,7 +163,7 @@ void AShootEmUpV2Character::Move(const FInputActionValue& Value)
 			{
 
 				// Interact with the crate
-				IInteractableInterface::Execute_Interact(HitResult.GetActor());
+				IInteractableInterface::Execute_CanInteract(HitResult.GetActor());
 			}
 		}
 		DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 3.0f, 0, 2.0f);

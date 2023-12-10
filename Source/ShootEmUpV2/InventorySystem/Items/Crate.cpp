@@ -35,9 +35,13 @@ ACrate::ACrate()
     }
 }
 
+void ACrate::OnCanInteract(AShootEmUpV2Character* PlayerCharacter)
+{
+}
+
 void ACrate::OnInteract(AShootEmUpV2Character* PlayerCharacter)
 {
-    if (PlayerCharacter)
+    /*if (PlayerCharacter)
     {
         GenerateLoot(PlayerCharacter);
 
@@ -45,13 +49,20 @@ void ACrate::OnInteract(AShootEmUpV2Character* PlayerCharacter)
 
         // Destroy the crate after looting
         Destroy();
-    }
+    }*/
 }
+
 
 void ACrate::Interact_Implementation()
 {
 
 }
+
+void ACrate::CanInteract_Implementation()
+{
+
+}
+
 
 void ACrate::GenerateLoot(AShootEmUpV2Character* PlayerCharacter)
 {

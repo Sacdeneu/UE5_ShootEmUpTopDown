@@ -17,6 +17,9 @@ class AShootEmUpV2Character : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* MoveAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	class UInputAction* InteractAction;
+
 	/** Inventory */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 		class UInventoryComponent* Inventory;
@@ -59,6 +62,8 @@ protected:
 
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
+	/** Called for movement input */
+	void Interact();
 
 protected:
 	// APawn interface
